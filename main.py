@@ -1,4 +1,4 @@
-import tokenizer
+import lexer
 
 test_code = '''
 .data               # section for data segment
@@ -50,12 +50,12 @@ print(f'Original:\n{test_code}')
 
 print('')
 
-tokens = tokenizer.tokenize(test_code)
+tokens = lexer.lex(test_code)
 for i, subtokens in enumerate(tokens):
     print(f'Tokens for line {i + 1}: {subtokens}')
 
 print('')
 
-token_count = tokenizer.count_tokens(tokens)
+token_count = lexer.count_tokens(tokens)
 for token_type in token_count.keys():
     print(f'There are {token_count[token_type]} counts of token type {token_type}')
