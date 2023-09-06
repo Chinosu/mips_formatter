@@ -5,23 +5,33 @@ from collections import defaultdict
 # SPIM instruction set obtained from 
 # https://www.dejazzer.com/coen4710/projects/1_SPIM_instr.pdf
 instructions = '|'.join([
-    'syscall', 'add', 'addu', 'addi', 'sub', 'subu', 'div', 'divu', 'rem',
-    'remu', 'mul', 'mult', 'multu', 'and', 'andi', 'neg', 'nor', 'not', 'or',
-    'ori', 'xor', 'xori', 'sll', 'sllv', 'srl', 'srlv', 'move', 'mfhi', 'mflo',
-    'li', 'lui', 'lb', 'sb', 'la', 'lw', 'sw', 'slt', 'slti', 'sltu', 'beq',
-    'beqz', 'bge', 'bgez', 'bgezal', 'bgt', 'bgtu', 'bgtz', 'le', 'leu', 'blez',
-    'ble', 'bltzal', 'blt', 'bltu', 'bltz', 'bne', 'bnez', 'j', 'jal', 'jr', 
-    'jalr'
+    'add', 'addi', 'addu', 'addiu', 'sub', 'subu', 'mul', 'mult', 'multu', 
+    'madd', 'maddu', 'msub', 'msubu', 'clo', 'clz', 'seb', 'seh', 'slt', 
+    'sltu', 'slti', 'sltiu', 'and', 'andi', 'or', 'ori', 'nor', 'xor', 'xori', 
+    'rotr', 'rotrv', 'sll', 'sllv', 'sra', 'srav', 'srl', 'srlv', 'lui', 'lb', 
+    'lbu', 'lh', 'lhu', 'lw', 'sb', 'sh', 'sw', 'mfhi', 'mflo', 'mthi', 'mtlo', 
+    'movz', 'movn', 'beq', 'bne', 'bgez', 'bgtz', 'bltz', 'blez', 'j', 'jal', 
+    'jr', 'jalr', 'syscall', 'break', 'teq', 'teqi', 'tne', 'tnei', 'tge', 
+    'tgeu', 'tgei', 'tgeiu', 'tlt', 'tltu', 'tlti', 'tltiu', 'div', 'divu', 
+    'rem', 'remu', 'seq', 'sne', 'sle', 'sleu', 'sgt', 'sgtu', 'sge', 'sgeu', 
+    'abs', 'neg', 'negu', 'not', 'rol', 'ror', 'li', 'la', 'b', 'beqz', 'bneq', 
+    'bge', 'bgeu', 'bgt', 'bgtu', 'blt', 'bltu', 'ble', 'bleu', 'tgt', 'tgtu', 
+    'tgti', 'tgtiu', 'tle', 'tleu', 'tlei', 'tleiu', 'nop'
 ])
 directives = '|'.join([
     'align', 'ascii', 'asciiz', 'byte', 'data', 'double', 'extern', 'float',
     'globl', 'half', 'kdata', 'ktext', 'space', 'text', 'word'
 ])
+registers = '|'.join([
+    'zero', 'at', 'v0', 'v1', 'a0', 'a1', 'a2', 'a3', 't0', 't1', 't2', 't3', 
+    't4', 't5', 't6', 't7', 's0', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 
+    't8', 't9', 'k0', 'k1', 'gp', 'sp', 'fp', 'ra'
+])
 token_specs = [
     ('COMMENT', r'#.*'),
     ('DIRECTIVE', fr'\.(?:{directives})\b'),
     ('INSTRUCTION', fr'\b({instructions})\b'),
-    ('REGISTER', r'\$[a-zA-Z0-9]+'),
+    ('REGISTER', fr'\$(?:{registers})\b'),
     ('FLOAT', r'-?(\d+\.\d+|\.\d+|\d+\.)'),
     ('INTEGER', r'-?\b\d+\b'),
     ('CHAR', r"'(?:\\[ntr]|\\'|[^\\'])'"),
