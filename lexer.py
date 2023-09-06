@@ -49,7 +49,7 @@ token_regex = re.compile(
 
 def lex(text: str) -> List[List[Tuple[str, str]]]:
     tokens = initial_lex(text)
-    return replace_unknowns_with_labels(tokens, find_labels(tokens))
+    return delete_whitespaces(replace_unknowns_with_labels(tokens, find_labels(tokens)))
 
 def initial_lex(text: str) -> List[List[Tuple[str, str]]]:
     tokens = []
@@ -83,6 +83,20 @@ def replace_unknowns_with_labels(
                 token_type = 'LABEL'
             new_subtokens.append((token_type, token_value))
         new_tokens.append(new_subtokens)
+    return new_tokens
+
+def delete_whitespaces(
+        tokens: List[List[Tuple[str, str]]]
+    ) -> List[List[Tuple[str, str]]]:
+    new_tokens = []
+    for sub_tokens in tokens:
+        new_tokens.append(
+            [
+                (token_type, token_value) 
+                for token_type, token_value in sub_tokens 
+                if token_type != 'WHITESPACE'
+            ]
+        )
     return new_tokens
 
 def count_tokens(tokens: List[List[Tuple[str, str]]]) -> Dict[str, int]:
