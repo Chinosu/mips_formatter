@@ -10,7 +10,8 @@ instructions = '|'.join([
     'ori', 'xor', 'xori', 'sll', 'sllv', 'srl', 'srlv', 'move', 'mfhi', 'mflo',
     'li', 'lui', 'lb', 'sb', 'la', 'lw', 'sw', 'slt', 'slti', 'sltu', 'beq',
     'beqz', 'bge', 'bgez', 'bgezal', 'bgt', 'bgtu', 'bgtz', 'le', 'leu', 'blez',
-    'bltzal', 'blt', 'bltu', 'bltz', 'bne', 'bnez', 'j', 'jal', 'jr', 'jalr'
+    'ble', 'bltzal', 'blt', 'bltu', 'bltz', 'bne', 'bnez', 'j', 'jal', 'jr', 
+    'jalr'
 ])
 directives = '|'.join([
     'align', 'ascii', 'asciiz', 'byte', 'data', 'double', 'extern', 'float',
