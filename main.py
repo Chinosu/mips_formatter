@@ -1,8 +1,7 @@
 import lexer
 import generator
 
-test_code = '''
-.data                   # section for data segment
+test_code = '''.data                   # section for data segment
 arr: .word 64, 34, 25, 12, 22, 11, 90
 size: .word 7
 
@@ -52,15 +51,13 @@ main:  # main function start
 '''
 
 tokens = lexer.lex(test_code)
-for i, subtokens in enumerate(tokens):
-    print(f'Tokens for line {i + 1}: {subtokens}')
-
-print('')
+# for i, subtokens in enumerate(tokens):
+    # # print(f'Tokens for line {i + 1}: {subtokens}')
 
 token_count = lexer.count_tokens(tokens)
-for token_type in token_count.keys():
-    print(f'There are {token_count[token_type]} counts of token type {token_type}')
+# for token_type in token_count.keys():
+    # print(f'There are {token_count[token_type]} counts of token type {token_type}')
 
-# formatted_code = generator.generate(tokens)
-# for line in formatted_code:
-#     print(line)
+code = generator.generate(tokens)
+for line in code:
+    print(line)
