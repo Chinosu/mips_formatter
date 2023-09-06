@@ -61,6 +61,6 @@ token_count = lexer.count_tokens(tokens)
 for token_type in token_count.keys():
     print(f'There are {token_count[token_type]} counts of token type {token_type}')
 
-# formatted_code = generator.generate_code(tokens)
+# formatted_code = generator.generate(tokens)
 # for line in formatted_code:
 #     print(line)

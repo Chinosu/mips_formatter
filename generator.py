@@ -8,7 +8,7 @@ from collections import defaultdict
 
 
 
-def generate_code(tokens):
+def generate(tokens):
     lines = []
     for subtokens in tokens:
         lines.append(generate_line(subtokens))
