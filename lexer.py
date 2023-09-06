@@ -10,7 +10,7 @@ instructions = '|'.join([
     'sltu', 'slti', 'sltiu', 'and', 'andi', 'or', 'ori', 'nor', 'xor', 'xori', 
     'rotr', 'rotrv', 'sll', 'sllv', 'sra', 'srav', 'srl', 'srlv', 'lui', 'lb', 
     'lbu', 'lh', 'lhu', 'lw', 'sb', 'sh', 'sw', 'mfhi', 'mflo', 'mthi', 'mtlo', 
-    'movz', 'movn', 'beq', 'bne', 'bgez', 'bgtz', 'bltz', 'blez', 'j', 'jal', 
+    'movz', 'move', 'movn', 'beq', 'bne', 'bgez', 'bgtz', 'bltz', 'blez', 'j', 'jal', 
     'jr', 'jalr', 'syscall', 'break', 'teq', 'teqi', 'tne', 'tnei', 'tge', 
     'tgeu', 'tgei', 'tgeiu', 'tlt', 'tltu', 'tlti', 'tltiu', 'div', 'divu', 
     'rem', 'remu', 'seq', 'sne', 'sle', 'sleu', 'sgt', 'sgtu', 'sge', 'sgeu', 
@@ -33,10 +33,11 @@ token_specs = [
     ('INSTRUCTION', fr'\b({instructions})\b'),
     ('REGISTER', fr'\$(?:{registers})\b'),
     ('FLOAT', r'-?(\d+\.\d+|\.\d+|\d+\.)'),
-    ('INTEGER', r'-?\b\d+\b'),
+    ('INTEGER', r'-?(\b\d+\b|0[xX][0-9a-fA-F]+)'),
     ('CHAR', r"'(?:\\[ntr]|\\'|[^\\'])'"),
     ('STRING', r'"[^"]*"'),
     ('LABEL_DEFINITION', r'[a-zA-Z0-9_]+:'),
+    # 'LABEL'
     ('COMMA', r','),
     ('LBRACKET', r'\('),
     ('RBRACKET', r'\)'),
@@ -49,7 +50,7 @@ token_regex = re.compile(
 
 def lex(text: str) -> List[List[Tuple[str, str]]]:
     tokens = initial_lex(text)
-    return delete_whitespaces(replace_unknowns_with_labels(tokens, find_labels(tokens)))
+    return delete_whitespace(replace_unknowns_with_labels(tokens, find_labels(tokens)))
 
 def initial_lex(text: str) -> List[List[Tuple[str, str]]]:
     tokens = []
@@ -85,18 +86,18 @@ def replace_unknowns_with_labels(
         new_tokens.append(new_subtokens)
     return new_tokens
 
-def delete_whitespaces(
+def delete_whitespace(
         tokens: List[List[Tuple[str, str]]]
     ) -> List[List[Tuple[str, str]]]:
     new_tokens = []
     for sub_tokens in tokens:
-        new_tokens.append(
-            [
-                (token_type, token_value) 
-                for token_type, token_value in sub_tokens 
-                if token_type != 'WHITESPACE'
-            ]
-        )
+        new_subtokens = [
+            (token_type, token_value) 
+            for token_type, token_value in sub_tokens 
+            if token_type != 'WHITESPACE'
+        ]
+        if len(new_subtokens) > 0:
+            new_tokens.append(new_subtokens)
     return new_tokens
 
 def count_tokens(tokens: List[List[Tuple[str, str]]]) -> Dict[str, int]:
