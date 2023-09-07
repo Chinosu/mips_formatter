@@ -47,6 +47,15 @@ token_specs = [
 token_regex = re.compile(
     '|'.join('(?P<%s>%s)' % pair for pair in token_specs)
 )
+label_directive_regex = re.compile(
+    r'^(?P<LABEL_DEFINITION>[a-zA-Z0-9_]+:)\s*(?P<DIRECTIVE>\.(?:' + directives + r')).*$'
+)
+# comment_and_whitespace_regex = re.compile(r'^\s*(?P<COMMENT>#.*)$')
+comment_regex = re.compile(r'^(?P<COMMENT>#.*)$')
+code_label_definition_regex = re.compile(r'(?P<LABEL_DEFINITION>[a-zA-Z0-9_]+:)')
+instruction_and_comment_regex = re.compile(
+    r'(?P<INSTRUCTION>\b(?:' + instructions + r')\b)(?P<COMMENT>#.*)'
+)
 
 def lex(text: str) -> List[List[Tuple[str, str]]]:
     tokens = initial_lex(text)
