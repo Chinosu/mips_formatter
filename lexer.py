@@ -1,5 +1,5 @@
 import re
-from typing import List, Tuple, Set, Dict
+from typing import List, Tuple, Dict
 from collections import defaultdict
 
 # SPIM instruction set obtained from 
