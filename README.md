@@ -1,15 +1,14 @@
 # mips_formatter
 A MIPS formatter.
+Follows [this](https://jashankj.space/notes/cse-comp1521-better-assembly/) assembly style guide (as of 7 Sep 2023).
 
 # Usage: 
 ```bash
 python3 main.py <filename>
 ```
 
-Follows [this](https://jashankj.space/notes/cse-comp1521-better-assembly/) assembly style guide (as of 7 Sep 2023).
-
 # Examples:
-## Example 1
+### Example 1
 **Before:**
 ```MIPS
 .data                   # section for data segment
@@ -115,7 +114,7 @@ outer_end:
 
 ```
 
-## Example 2
+### Example 2
 **Before:**
 ```MIPS
 .data
