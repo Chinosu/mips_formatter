@@ -3,7 +3,7 @@ from typing import List, Tuple, Dict
 from collections import defaultdict
 
 # SPIM instruction set obtained from 
-# https://www.dejazzer.com/coen4710/projects/1_SPIM_instr.pdf
+# https://cgi.cse.unsw.edu.au/~cs1521/23T2/resources/mips-guide.html#:~:text=back%20to%20top-,Instructions,-The%20mipsy%20emulator
 instructions = '|'.join([
     'add', 'addi', 'addu', 'addiu', 'sub', 'subu', 'mul', 'mult', 'multu', 
     'madd', 'maddu', 'msub', 'msubu', 'clo', 'clz', 'seb', 'seh', 'slt', 
