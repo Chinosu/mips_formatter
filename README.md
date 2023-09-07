@@ -118,48 +118,48 @@ outer_end:
 **Before:**
 ```MIPS
 .data
-prompt1:        .asciiz "Enter the first integer: "
-prompt2:        .asciiz "Enter the second integer: "
-result_str:     .asciiz "The sum is: "
+prompt1:  .asciiz "Enter the first integer: "
+prompt2:  .asciiz "Enter the second integer: "
+result_str: .asciiz "The sum is: "
 
 .text
 main:
-        # Print the first prompt
-        li       $v0, 4                 # System call code for print string
-        la       $a0, prompt1           # Load address of the string
-        syscall                         # Print the string
+    # Print the first prompt
+    li   $v0, 4         # System call code for print string
+    la   $a0, prompt1  # Load address of the string
+    syscall            # Print the string
 
-        # Read the first integer
-        li       $v0, 5                 # System call code for read integer
-        syscall                         # Read the integer
-        move     $t0, $v0               # Move the read integer to $t0
+    # Read the first integer
+    li   $v0, 5        # System call code for read integer
+    syscall            # Read the integer
+    move $t0, $v0      # Move the read integer to $t0
 
-        # Print the second prompt
-        li       $v0, 4                 # System call code for print string
-        la       $a0, prompt2           # Load address of the string
-        syscall                         # Print the string
+    # Print the second prompt
+    li   $v0, 4        # System call code for print string
+    la   $a0, prompt2  # Load address of the string
+    syscall            # Print the string
 
-        # Read the second integer
-        li       $v0, 5                 # System call code for read integer
-        syscall                         # Read the integer
-        move     $t1, $v0               # Move the read integer to $t1
+    # Read the second integer
+    li   $v0, 5        # System call code for read integer
+    syscall            # Read the integer
+    move $t1, $v0      # Move the read integer to $t1
 
-        # Add the two numbers
-        add      $t2, $t0, $t1          # $t2 = $t0 + $t1
+    # Add the two numbers
+    add  $t2, $t0, $t1 # $t2 = $t0 + $t1
 
-        # Print the result
-        li       $v0, 4                 # System call code for print string
-        la       $a0, result_str        # Load address of the string
-        syscall                         # Print the string
+    # Print the result
+    li   $v0, 4        # System call code for print string
+    la   $a0, result_str # Load address of the string
+    syscall            # Print the string
 
-        # Print the sum
-        move     $a0, $t2               # Move the sum to $a0 for printing
-        li       $v0, 1                 # System call code for print integer
-        syscall                         # Print the integer
+    # Print the sum
+    move $a0, $t2      # Move the sum to $a0 for printing
+    li   $v0, 1        # System call code for print integer
+    syscall            # Print the integer
 
-        # Exit the program
-        li       $v0, 10                # System call code for exit
-        syscall                         # Exit the program
+    # Exit the program
+    li   $v0, 10       # System call code for exit
+    syscall            # Exit the program
 ```
 
 **After:**
