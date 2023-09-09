@@ -16,7 +16,7 @@ instructions = '|'.join([
     'rem', 'remu', 'seq', 'sne', 'sle', 'sleu', 'sgt', 'sgtu', 'sge', 'sgeu', 
     'abs', 'neg', 'negu', 'not', 'rol', 'ror', 'li', 'la', 'b', 'beqz', 'bneq', 
     'bge', 'bgeu', 'bgt', 'bgtu', 'blt', 'bltu', 'ble', 'bleu', 'tgt', 'tgtu', 
-    'tgti', 'tgtiu', 'tle', 'tleu', 'tlei', 'tleiu', 'nop'
+    'tgti', 'tgtiu', 'tle', 'tleu', 'tlei', 'tleiu', 'nop', 'bnez'
 ])
 directives = '|'.join([
     'align', 'ascii', 'asciiz', 'byte', 'data', 'double', 'extern', 'float',
