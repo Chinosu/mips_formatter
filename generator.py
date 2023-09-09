@@ -39,10 +39,10 @@ def add_horizontal_whitespace(tokens: List[List[Tuple[str, str]]]) -> List[List[
     new_tokens = align_inline_comments(new_tokens)
     return new_tokens
 
-def align_data_section(tokens):
+def align_data_section(tokens: List[List[Tuple[str, str]]]) -> List[List[Tuple[str, str]]]:
     return align_data_comments(align_data_code(tokens))
 
-def align_data_code(tokens):
+def align_data_code(tokens: List[List[Tuple[str, str]]]) -> List[List[Tuple[str, str]]]:
     new_tokens = tokens
     longest_len = 0
     for subtokens in new_tokens:
@@ -61,7 +61,7 @@ def align_data_code(tokens):
         new_tokens[i].insert(3, ('WHITESPACE', ' ' * ((multiplier + 1) * tab_len - len(subtokens[0][1]) - len(subtokens[1][1]) - len(subtokens[2][1]))))
     return new_tokens
 
-def align_data_comments(tokens):
+def align_data_comments(tokens: List[List[Tuple[str, str]]]) -> List[List[Tuple[str, str]]]:
     new_tokens = tokens
     longest_len = 0
     for subtokens in new_tokens:
@@ -79,7 +79,7 @@ def align_data_comments(tokens):
         new_tokens[i].insert(len(subtokens) - 1, ('WHITESPACE', ' ' * (tab_len * multiplier - sum(len(token_value) for _, token_value in subtokens[:-1]))))
     return new_tokens
 
-def align_inline_comments(tokens):
+def align_inline_comments(tokens: List[List[Tuple[str, str]]]) -> List[List[Tuple[str, str]]]:
     new_tokens = tokens
     for i, subtokens in enumerate(tokens):
         if not (lexer.comment_regex.match(tokens_to_line(subtokens)) and i + 1 < len(tokens) and not lexer.code_label_definition_regex.match(tokens_to_line(tokens[i + 1]))):
@@ -87,7 +87,7 @@ def align_inline_comments(tokens):
         new_tokens[i].insert(0, ('WHITESPACE', ' ' * tab_len))
     return new_tokens
 
-def align_right_side_comments(tokens):
+def align_right_side_comments(tokens: List[List[Tuple[str, str]]]) -> List[List[Tuple[str, str]]]:
     new_tokens = tokens
     longest_len = 0
     for subtokens in tokens:
@@ -107,9 +107,7 @@ def align_right_side_comments(tokens):
         new_tokens[i].insert(len(subtokens[:-1]), ('WHITESPACE', ' ' * (multiplier * tab_len - line_len)))
     return new_tokens
 
-def add_vertical_whitespace(
-        tokens: List[List[Tuple[str, str]]]
-    ) -> List[List[Tuple[str, str]]]:
+def add_vertical_whitespace(tokens: List[List[Tuple[str, str]]]) -> List[List[Tuple[str, str]]]:
     new_tokens = []
     for i, subtokens in enumerate(tokens):
         if (i > 0 and 
@@ -145,7 +143,7 @@ def tokens_to_text(tokens: List[List[Tuple[str, str]]]) -> List[str]:
         lines.append(line)
     return lines
 
-def tokens_to_line(tokens):
+def tokens_to_line(tokens: List[List[Tuple[str, str]]]) -> str:
     line = ''
     for _, token_value in tokens:
         line += token_value
