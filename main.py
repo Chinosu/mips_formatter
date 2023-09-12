@@ -23,7 +23,7 @@ with open(file_name, 'r') as file:
     unformatted_code = file.read()
     tokens = lexer.lex(unformatted_code)
 
-if lexer.count_tokens(tokens)['UNKNOWN'] != 0:
+if lexer.count_tokens(tokens).get('UNKNOWN', 0) != 0:
     print("Error: UNKNOWN tokens encountered.")
     sys.exit(1)
 
